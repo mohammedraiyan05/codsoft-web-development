@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            font-family: Arial, sans-serif;
+            background-color: #2c2f33;
+            color: white;
+        }
+
+        .tagline {
+            text-align: center;
+            font-size: 20px;
+            color: #00ffcc;
+            font-style: italic;
+            margin: 20px 0;
+            animation: fadeIn 1s ease-in-out;
+            text-shadow: 0px 0px 10px rgba(0, 255, 204, 0.5);
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #1c1e22;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            transition: transform 0.3s ease;
+            transform: translateX(0);
+            z-index: 1000;
+        }
+
+        .sidebar.active {
+            transform: translateX(-100%);
+        }
+
+        .portfolio-title {
+            color: #00ffcc;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+            position: relative;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: white;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #444;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #00ffcc;
+            color: #000;
+            transform: scale(1.05);
+        }
+
+        .dropdown {
+            display: none;
+            flex-direction: column;
+            background-color: #333;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            width: 180px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .sidebar ul li:hover .dropdown {
+            display: flex;
+        }
+
+        .menu-toggle {
+            display: none; /* Hidden on larger screens */
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background-color: #00ffcc;
+            color: black;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            z-index: 1100;
+            border-radius: 5px;
+        }
+
+        .service-box {
+            background-color: #444;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 90%; /* Make it responsive by using percentage */
+            max-width: 600px; /* Limit width for larger screens */
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .service-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 255, 204, 0.5);
+        }
+
+        /* Centered Heading Styles */
+        .section h1 {
+            text-align: center;
+            color: #00ffcc; /* Change heading color */
+            font-size: 2.5em; /* Make it bigger */
+            margin-bottom: 20px; /* Space below the heading */
+            text-shadow: 0px 0px 10px rgba(0, 255, 204, 0.5); /* Add shadow effect */
+        }
+
+        .section h1:hover {
+            color: #ffffff; /* Change color on hover */
+            transform: scale(1.1); /* Scale up on hover */
+            transition: color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+        }
+
+        .service-box h2 {
+            color: #00ffcc;
+        }
+
+        .service-box p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 270px; /* Sidebar width + padding */
+            padding: 40px;
+            width: calc(100% - 270px); /* Calculate remaining width */
+            transition: margin-left 0.3s;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block; /* Show toggle button */
+            }
+
+            .sidebar {
+                transform: translateX(-100%); /* Initially hides the sidebar */
+            }
+
+            .sidebar.active {
+                transform: translateX(0); /* Moves the sidebar into view */
+            }
+
+            .main-content {
+                margin-left: 0; /* Remove margin for mobile */
+                padding: 20px; /* Reduced padding for mobile view */
+                width: 100%; /* Fill the width */
+            }
+
+            .service-box {
+                width: 95%; /* Use almost full width for mobile */
+                margin: 10px auto; /* Smaller margin for service boxes */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .service-box p {
+                font-size: 14px; /* Smaller font size for service description */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="menu-toggle">☰ Menu</button>
+    <div class="sidebar">
+        <h2 class="portfolio-title">My Portfolio</h2>
+        <ul>
+            <li><a href="index.html">🏠 Home</a></li>
+            <li>
+                <a href="about.html">👤 About Me →</a>
+                <div class="dropdown">
+                    <a href="skills.html">✅ Skills</a>
+                    <a href="education.html">🎓 Education</a>
+                </div>
+            </li>
+            <li>
+                <a href="services.html">📋 Services →</a>
+                <div class="dropdown">
+                    <a href="projects.html">🖥️ Projects</a>
+                    <a href="internship.html">💼 Internship</a>
+                </div>
+            </li>
+            <li>
+                <a href="gallery.html">🖼 Gallery →</a>
+                <div class="dropdown">
+                    <a href="certificates.html">🏅 Certificates</a>
+                    <a href="achievements.html">🏆 Achievements</a>
+                </div>
+            </li>
+            <li><a href="contact.html">💬 Contact Me</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="section">
+            <h1>Services & Roles</h1>
+            <div class="service-box">
+                <h2>Web Development</h2>
+                <p>Creating responsive and modern websites using HTML, CSS, JavaScript, and backend technologies.</p>
+            </div>
+            <div class="service-box">
+                <h2>Full-Stack Development</h2>
+                <p>Building dynamic and scalable web applications from front-end to back-end.</p>
+            </div>
+            <div class="service-box">
+                <h2>Class Representative</h2>
+                <p>Acting as a liaison between students and faculty, ensuring clear communication and representation of student concerns.</p>
+            </div>
+            <div class="service-box">
+                <h2>Event Coordinator</h2>
+                <p>Planning and organizing events that foster community engagement and enhance the student experience.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggle = document.querySelector(".menu-toggle");
+            const sidebar = document.querySelector(".sidebar");
+
+            menuToggle.addEventListener("click", function () {
+                sidebar.classList.toggle("active");
+            });
+        });
+    </script>
+</body>
+
+</html>

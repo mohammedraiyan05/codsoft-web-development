@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificates - Portfolio</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, #2c2f33, #1a1d20);
+            color: white;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #1c1e22;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            transition: transform 0.3s ease;
+            z-index: 1000; /* Add this line to bring sidebar to the front */
+        }
+
+        .sidebar h2 {
+            color: #00ffcc;
+            text-align: center;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+            position: relative;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: white;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #444;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #00ffcc;
+            color: #000;
+        }
+
+        .dropdown {
+            display: none;
+            flex-direction: column;
+            background-color: #333;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            width: 180px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .sidebar ul li:hover .dropdown {
+            display: flex;
+        }
+
+        /* Responsive styles */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background-color: #00ffcc;
+            color: black;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            z-index: 1100;
+            border-radius: 5px;
+        }
+
+        .main-content {
+            margin-left: 270px;
+            padding: 20px;
+            width: calc(100% - 270px);
+            text-align: center;
+            transition: margin-left 0.3s ease;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 10px;
+        }
+
+        .event {
+            background: #444;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s;
+        }
+
+        .event:hover {
+            transform: scale(1.05);
+        }
+
+        .event img {
+            width: 100%;
+            height: 300px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .event h3 {
+            color: #00ffcc;
+            font-size: 22px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 5px rgba(0, 255, 204, 0.5);
+        }
+
+        .event p {
+            color: #d3d3d3;
+            font-size: 16px;
+            margin: 5px 0;
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-toggle">☰ Menu</button>
+    <div class="sidebar">
+        <h2 class="portfolio-title">My Portfolio</h2>
+        <ul>
+            <li><a href="index.html">🏠 Home</a></li>
+            <li>
+                <a href="about.html">👤 About Me →</a>
+                <div class="dropdown">
+                    <a href="skills.html">&#x2705 Skills</a>
+                    <a href="education.html">🎓 Education</a>
+                </div>
+            </li>
+            <li>
+                <a href="services.html">📋 Services →</a>
+                <div class="dropdown">
+                    <a href="projects.html">🖥️ Projects</a>
+                    <a href="internship.html">💼 Internship</a>
+                </div>
+            </li>
+            <li>
+                <a href="gallery.html">🖼 Gallery →</a>
+                <div class="dropdown">
+                    <a href="certificates.html">🏅 Certificates</a>
+                    <a href="achievements.html">🏆 Achievements</a>
+                </div>
+            </li>
+            <li><a href="contact.html">💬 Contact Me</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <h1>Certificates</h1>
+        <div class="grid-container" id="grid"></div>
+    </div>
+
+    <script>
+        const events = [
+            { img: 'eloquence22.jpeg', name: "ELOQUENCE'22", type: "National level Symposium", participatedIn: "Debate", conductedBy: "C.Abdul Hakeem College of Engineering and Technology", date: "Aug 2022" },
+            { img: 'speakforindia.jpeg', name: "SPEAK FOR INDIA", type: "Speech", participatedIn: "Open Mic", conductedBy: "C.Abdul Hakeem College of Engineering and Technology", date: "04 Feb 2023" },
+            { img: 'flutterdart.jpeg', name: "Flutter & Dart", type: "Workshop", participatedIn: "Mobile Application Workshop", conductedBy: "indworks", date: "22 April 2024" },
+            { img: 'altsense.jpeg', name: "AltSense", type: "Workshop", participatedIn: "Internet of Things (IoT) with NodeMCU", conductedBy: "Altsense", date: "12th & 13th October 2023" },
+            { img: 'eloquence23_connection.jpeg', name: "ELOQUENCE'23", type: "National level Symposium", participatedIn: "Connection", conductedBy: "C.Abdul Hakeem College of Engineering and Technology", date: "7th October 2023" },
+            { img: 'eloquence23_visualart.jpeg', name: "ELOQUENCE'23", type: "National level Symposium", participatedIn: "Visual Art", conductedBy: "C.Abdul Hakeem College of Engineering and Technology", date: "7th October 2023" },
+            { img: 'projectexpo24.jpeg', name: "Project Expo'24", type: "Project Expo", participatedIn: "IoT based Waste Segregation with Embedded System", conductedBy: "C.Abdul Hakeem College of Engineering and Technology", date: "23rd April 2024" },
+            { img: 'webcrafthackathon24.jpeg', name: "WEBCRAFT HACKATHON'24", type: "Hackathon", participatedIn: "Web Development", conductedBy: "C.Abdul Hakeem College of Engineering and Technology", date: "3rd October 2024" },
+            { img: 'webcraft1.jpeg', name: "WEBCRAFT HACKATHON'24", type: "Hackathon", participatedIn: "Web Development", conductedBy: "C.Abdul Hakeem College of Engineering and Technology", date: "3rd October 2024" },
+            { img: 'webcraft2.0.jpeg', name: "WEBCRAFT HACKATHON 2.0", type: "Hackathon", participatedIn: "Web Development", conductedBy: "C.Abdul Hakeem College of Engineering and Technology", date: "19th November 2024" },
+            { img: 'techno.jpeg', name: "TECHNO RENDEZVOUS'24", type: "National level Symposium", participatedIn: "Web Designing", conductedBy: "C.Abdul Hakeem College of Engineering and Technology", date: "28th October 2024" },
+            { img: 'infogram24.jpeg', name: "INFOGRAM'24", type: "National level Symposium", participatedIn: "Web Design", conductedBy: "C.Abdul Hakeem College of Engineering and Technology", date: "16th October 2024" },
+            { img: 'technovial24.jpeg', name: "TECHNOVIAL'24", type: "National level Symposium", participatedIn: "Technical Quiz", conductedBy: "C.Abdul Hakeem College of Engineering and Technology", date: "10th October 2024" },
+            { img: 'eloquence24.jpeg', name: "ELOQUENCE'23", type: "National level Symposium", participatedIn: "Web Designing", conductedBy: "C.Abdul Hakeem College of Engineering and Technology", date: "23rd October 2023" },
+            { img: 'projectexpoentitledasiot.jpeg', name: "TECHNOVIAL'2K23", type: "National level Symposium", participatedIn: "Project EXPO", conductedBy: "C.Abdul Hakeem College of Engineering and Technology", date: "27rd October 2023" },
+            { img: 'technicalquiz.jpeg', name: "TECHNOVIAL'2K23", type: "National level Symposium", participatedIn: "Technical Quiz", conductedBy: "C.Abdul Hakeem College of Engineering and Technology", date: "27rd October 2023" },
+            { img: 'aptechlearning.jpeg', name: "Aptech Learning", type: "Webinar", participatedIn: "Artificial Intelligence and Machine Learning", conductedBy: "Genesis Academy", date: "23rd Dec 2023" },
+            { img: 'novitech_ai.jpeg', name: "NoviTech", type: "30 Days MasterClass", participatedIn: "Artificial Intelligence", conductedBy: "NoviTech R&D Private Limited", date: "22nd Jan - 21st Feb 2024" },
+            { img: 'novitech_iot.jpeg', name: "NoviTech", type: "30 Days MasterClass", participatedIn: "Internet of Things", conductedBy: "NoviTech R&D Private Limited", date: "5th Feb - 11th March 2024" },
+            { img: 'novitech_ds.jpeg', name: "NoviTech", type: "2 Hours Workshop", participatedIn: "Data Science with AI", conductedBy: "NoviTech R&D Private Limited", date: "28th Jan 2024" },
+            { img: 'novitech_blockchain.jpeg', name: "NoviTech", type: "2 Hours Workshop", participatedIn: "Blockchain with React JS", conductedBy: "NoviTech R&D Private Limited", date: "26th Jan 2024" },
+            { img: 'novitech_chatbot.jpeg', name: "NoviTech", type: "2 Hours Workshop", participatedIn: "AI Chatbot Using NLP", conductedBy: "NoviTech R&D Private Limited", date: "11th Feb 2024" },
+            { img: 'novitech_embedded.jpeg', name: "NoviTech", type: "2 Hours Workshop", participatedIn: "Embedded System with IoT", conductedBy: "NoviTech R&D Private Limited", date: "26th Jan 2024" },
+            { img: 'novitech_webdev.jpeg', name: "NoviTech", type: "2 Hours Workshop", participatedIn: "Web Development Using React.js", conductedBy: "NoviTech R&D Private Limited", date: "28th Jan 2024" },
+            { img: 'novitech_iot_cloud.jpeg', name: "NoviTech", type: "2 Hours Workshop", participatedIn: "Connecting Devices With Cloud - IoT", conductedBy: "NoviTech R&D Private Limited", date: "18th Feb 2024" },
+            { img: 'novitech_cybersecurity.jpeg', name: "NoviTech", type: "2 Hours Workshop", participatedIn: "Cybersecurity", conductedBy: "NoviTech R&D Private Limited", date: "27th Jan 2024" },
+            { img: 'novitech_fullstack.jpeg', name: "NoviTech", type: "2 Hours Workshop", participatedIn: "Build a Full Stack Project in Just 3 Hours", conductedBy: "NoviTech R&D Private Limited", date: "25th Feb 2024" },
+            { img: 'novitech_ai1.jpeg', name: "NoviTech", type: "2 Hours Workshop", participatedIn: "Artificial Intelligence", conductedBy: "NoviTech R&D Private Limited", date: "27th Jan 2024" },
+            { img: 'novitech_iot_apr.jpeg', name: "NoviTech", type: "2 Hours Workshop", participatedIn: "Internet of Things", conductedBy: "NoviTech R&D Private Limited", date: "27th April 2024" },
+            { img: 'excelr_git.jpeg', name: "EXCELR Raising Excellence", type: "20 Hours Live Training Program", participatedIn: "Git and GitHub", conductedBy: "ExcelR Edtech Pvt. Ltd", date: "24th Jan - 7th Feb 2024" },
+            { img: 'dataskills.jpeg', name: "Data Skills", type: "3 Day Challenge", participatedIn: "Data Skills", conductedBy: "Crion Versity", date: "2024" },
+            { img: 'skillmentorship.jpeg', name: "Skill Academy", type: "Campus Program", participatedIn: "Skill Mentorship Program", conductedBy: "Testbook", date: "18th March - 23rd March 2024" }
+        ];     
+
+        // Function to convert date string to a comparable format
+        function convertDateToComparable(dateStr) {
+            const regexSingleDate = /(\d{1,2})(?:st|nd|rd|th)? ([A-Za-z]+) (20\d{2})/;
+            const regexRangeDate = /(\w+\s\d{1,2})(?:\s&\s|\s+–\s+)(\d{1,2},?\s\d{4})/;            
+            const regexFallback = /(\d{1,2})(?:st|nd|rd|th)?\s(\w+).*?(\d{4})/;
+
+            if (regexRangeDate.test(dateStr)) {
+                const matchedRange = dateStr.match(regexRangeDate);
+                return new Date(`${matchedRange[2]}`);
+            }
+
+            const matchSingle = dateStr.match(regexSingleDate);
+            if (matchSingle) {
+                return new Date(`${matchSingle[2]} ${matchSingle[1]}, ${matchSingle[3]}`);
+            }
+
+            const fallbackMatch = dateStr.match(regexFallback);
+            if (fallbackMatch) {
+                return new Date(`${fallbackMatch[2]} ${fallbackMatch[1]}, ${fallbackMatch[3]}`);
+            }
+
+            return new Date(dateStr);
+        }
+
+        // Sort the events by date, latest first
+        events.sort((a, b) => {
+            return convertDateToComparable(b.date) - convertDateToComparable(a.date);
+        });
+
+        const grid = document.getElementById('grid');
+
+        function displayEvents() {
+            grid.innerHTML = '';
+            events.forEach(event => {
+                const eventDiv = document.createElement('div');
+                eventDiv.className = 'event';
+                eventDiv.innerHTML = `
+                    <img src="${event.img}" alt="${event.name}">
+                    <h3>${event.name}</h3>
+                    <p><strong>Type:</strong> ${event.type}</p>
+                    <p><strong>Participated In:</strong> ${event.participatedIn}</p>
+                    <p><strong>Conducted By:</strong> ${event.conductedBy}</p>
+                    <p><strong>Date:</strong> ${event.date}</p>
+                `;
+                grid.appendChild(eventDiv);
+            });
+        }
+
+        displayEvents();
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggle = document.querySelector(".menu-toggle");
+            const sidebar = document.querySelector(".sidebar");
+
+            menuToggle.addEventListener("click", function () {
+                sidebar.classList.toggle("active");
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(45deg, #2c2f33, #1a1d20);
+            color: white;
+            display: flex;
+            transition: background 0.5s;
+        }
+
+        .tagline {
+            text-align: center;
+            font-size: 20px;
+            color: #00ffcc;
+            font-style: italic;
+            margin: 20px 0;
+            animation: fadeIn 1s ease-in-out;
+            text-shadow: 0px 0px 10px rgba(0, 255, 204, 0.5);
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #1c1e22;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            transition: transform 0.3s ease;
+            transform: translateX(0);
+            z-index: 1000;
+        }
+
+        .sidebar.active {
+            transform: translateX(-100%);
+        }
+
+        .portfolio-title {
+            color: #00ffcc;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+            position: relative;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: white;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #444;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #00ffcc;
+            color: #000;
+            transform: scale(1.05);
+        }
+
+        .dropdown {
+            display: none;
+            flex-direction: column;
+            background-color: #333;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            width: 180px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .sidebar ul li:hover .dropdown {
+            display: flex;
+        }
+
+        .menu-toggle {
+            display: none; /* Hidden on larger screens */
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background-color: #00ffcc;
+            color: black;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            z-index: 1100;
+            border-radius: 5px;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 40px;
+            width: calc(100% - 250px);
+            max-width: 1000px;
+            transition: margin-left 0.3s, padding 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+        }
+
+        .section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px;
+            animation: fadeIn 0.5s ease-in-out;
+            width: 100%;
+        }
+
+        .section h1 {
+            font-size: 32px;
+            color: #00ffcc;
+            margin-bottom: 20px;
+            transition: color 0.3s;
+        }
+
+        .section h1:hover {
+            color: #009999;
+            text-shadow: 0px 0px 10px rgba(0, 255, 204, 0.5);
+        }
+
+        .skills-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .skills-category {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 90%;
+            margin: 20px 0;
+            background-color: #2c2f33;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .skills-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .skill {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #444;
+            padding: 15px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            transition: transform 0.3s, background 0.3s;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .skill:hover {
+            transform: scale(1.05);
+            background: #00ffcc;
+            color: black;
+        }
+
+        /* Progress Bar Styles */
+        .progress {
+            display: flex;
+            justify-content: space-between;
+            width: 70%;
+            height: 30px;
+            border-radius: 10px;
+            background-color: #555;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-segment {
+            width: 9%; /* Allow 1% for gap */
+            height: 100%;
+            background-color: transparent;
+            transition: background-color 0.5s;
+            margin-right: 1%; /* Small gap between segments */
+            border-radius: 3px; /* Slight rounding for segment corners */
+        }
+
+        .progress-segment:last-child {
+            margin-right: 0; /* Remove right margin for the last segment */
+        }
+
+        .progress-segment.filled {
+            background-color: #00ffcc;
+            box-shadow: 0 0 5px rgba(0, 255, 204, 0.5); /* Glow effect */
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .menu-toggle {
+                display: block; /* Show toggle button on smaller screens */
+            }
+
+            .sidebar {
+                transform: translateX(-100%); /* Initially hides the sidebar */
+            }
+
+            .sidebar.active {
+                transform: translateX(0); /* Moves the sidebar into view */
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+            }
+
+            .section {
+                padding: 20px;
+                text-align: center;
+                width: 100%;
+            }
+
+            .section h1 {
+                font-size: 24px;
+            }
+
+            .skill {
+                width: 100%; /* Make skills full-width on small screens */
+                padding: 12px; /* Reduce padding */
+                font-size: 16px; /* Adjust font size */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="menu-toggle">☰ Menu</button>
+    <div class="sidebar">
+        <h2 class="portfolio-title">My Portfolio</h2>
+        <ul>
+            <li><a href="index.html">🏠 Home</a></li>
+            <li>
+                <a href="about.html">👤 About Me →</a>
+                <div class="dropdown">
+                    <a href="skills.html">&#x2705 Skills</a>
+                    <a href="education.html">🎓 Education</a>
+                </div>
+            </li>
+            <li>
+                <a href="services.html">📋 Services →</a>
+                <div class="dropdown">
+                    <a href="projects.html">🖥️ Projects</a>
+                    <a href="internship.html">💼 Internship</a>
+                </div>
+            </li>
+            <li>
+                <a href="gallery.html">🖼 Gallery →</a>
+                <div class="dropdown">
+                    <a href="certificates.html">🏅 Certificates</a>
+                    <a href="achievements.html">🏆 Achievements</a>
+                </div>
+            </li>
+            <li><a href="contact.html">💬 Contact Me</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div id="skills" class="section">
+            <h1>Skills</h1>
+            <div class="skills-container">
+                <div class="skills-category">
+                    <h2>Technical Skills</h2>
+                    <div class="skills-list">
+                        <div class="skill">
+                            Python
+                            <div class="progress">
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            HTML
+                            <div class="progress">
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            CSS
+                            <div class="progress">
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            JavaScript
+                            <div class="progress">
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            MySQL
+                            <div class="progress">
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            Power BI
+                            <div class="progress">
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            Git & GitHub
+                            <div class="progress">
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skills-category">
+                    <h2>Non-Technical Skills</h2>
+                    <div class="skills-list">
+                        <div class="skill">
+                            Problem Solving
+                            <div class="progress">
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            Time Management
+                            <div class="progress">
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            Leadership
+                            <div class="progress">
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            Project Management
+                            <div class="progress">
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            Teamwork
+                            <div class="progress">
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            Communication
+                            <div class="progress">
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment filled"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                                <div class="progress-segment"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggle = document.querySelector(".menu-toggle");
+            const sidebar = document.querySelector(".sidebar");
+    
+            menuToggle.addEventListener("click", function () {
+                sidebar.classList.toggle("active"); // Toggle the active class to show/hide the sidebar
+            });
+        });
+    </script>
+</body>
+
+</html>

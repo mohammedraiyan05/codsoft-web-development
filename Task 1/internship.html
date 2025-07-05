@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Internship - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            font-family: Arial, sans-serif;
+            background-color: #2c2f33;
+            color: white;
+            transition: background-color 0.5s ease;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #1c1e22;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            transition: 0.3s;
+            z-index: 1000;
+        }
+
+        .sidebar h2 {
+            color: #00ffcc;
+            text-align: center;
+            margin-bottom: 20px; /* Improved spacing */
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+            position: relative;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: white;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #444;
+            transition: 0.3s;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #00ffcc;
+            color: #000;
+            transform: scale(1.05); /* Added scale effect */
+        }
+
+        .dropdown {
+            display: none;
+            flex-direction: column;
+            background-color: #333;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            width: 180px;
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 999; /* Always above the sidebar */
+        }
+
+        .sidebar ul li:hover .dropdown {
+            display: flex;
+        }
+
+        .menu-toggle {
+            display: none; /* Hidden on larger screens */
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background-color: #00ffcc;
+            color: black;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            z-index: 1100;
+            border-radius: 5px;
+        }
+
+        .main-content {
+            margin-left: 270px;
+            padding: 40px;
+            width: 100%;
+            transition: margin-left 0.5s ease; /* Transition for margin left */
+        }
+
+        .section {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .internship-container {
+            display: flex;
+            background: #444;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 80%;
+            max-width: 1200px;
+            margin: auto;
+            text-align: left;
+            align-items: center;
+        }
+
+        .internship-container img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 20px;
+            margin-right: 20px;
+            transition: transform 0.3s; /* Apply transition */
+        }
+
+        .internship-container img:hover {
+            transform: scale(1.05); /* Image scaling on hover */
+        }
+
+        .internship-details {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        .internship-details h2 {
+            color: #00ffcc;
+            font-size: 25px;
+            margin-bottom: 15px;
+            transition: color 0.3s; /* Transition for color */
+        }
+
+        .internship-details h2:hover {
+            color: #009999; /* Change color on hover */
+        }
+
+        .internship-details h3 {
+            color: #ffffff;
+            font-size: 20px;
+            margin-top: 15px;
+        }
+
+        .internship-details p {
+            color: #ccc;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 220px; /* Adjust sidebar width */
+                position: fixed;
+                transform: translateX(-100%); /* Hide sidebar by default */
+            }
+
+            .sidebar.active {
+                transform: translateX(0); /* Show sidebar when active */
+            }
+
+            .menu-toggle {
+                display: block; /* Show toggle button on smaller screens */
+            }
+
+            .main-content {
+                margin-left: 0; /* Remove left margin */
+                padding: 20px; /* Reduced padding for mobile view */
+            }
+
+            .section {
+                padding: 20px; /* Reduced padding for mobile view */
+            }
+
+            .internship-container {
+                flex-direction: column; /* Stack image and details on mobile */
+                align-items: center; /* Center items */
+            }
+
+            .internship-container img {
+                margin-right: 0; /* Remove margin for image on mobile */
+                margin-bottom: 15px; /* Add margin below for spacing */
+            }
+
+            .internship-details {
+                text-align: center; /* Center text on mobile */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="menu-toggle">☰ Menu</button>
+    <div class="sidebar">
+        <h2 class="portfolio-title">My Portfolio</h2>
+        <ul>
+            <li><a href="index.html">🏠 Home</a></li>
+            <li>
+                <a href="about.html">👤 About Me →</a>
+                <div class="dropdown">
+                    <a href="skills.html">&#x2705 Skills</a>
+                    <a href="education.html">🎓 Education</a>
+                </div>
+            </li>
+            <li>
+                <a href="services.html">📋 Services →</a>
+                <div class="dropdown">
+                    <a href="projects.html">🖥️ Projects</a>
+                    <a href="internship.html">💼 Internship</a>
+                </div>
+            </li>
+            <li>
+                <a href="gallery.html">🖼 Gallery →</a>
+                <div class="dropdown">
+                    <a href="certificates.html">🏅 Certificates</a>
+                    <a href="achievements.html">🏆 Achievements</a>
+                </div>
+            </li>
+            <li><a href="contact.html">💬 Contact Me</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="section">
+            <h1>My Internship</h1>
+            <div class="internship-container">
+                <img src="internship.jpeg" alt="Internship at CodSoft">
+                <div class="internship-details">
+                    <h2>Virtual Internship - Data Science</h2>
+                    <h3>📍 Company: CodSoft</h3>
+                    <h3>📅 Duration: 4 Weeks (10 Feb 2025 - 10 Mar 2025)</h3>
+                    <h3>🎯 Role: Data Science Intern</h3>
+                    <p>We are excited to welcome you to CodSoft as a Data Science Intern. This internship focuses on learning, skill development, and hands-on experience in the field of data science.</p>
+                    <p>Through this opportunity, you will work on real-world data science projects, analyze large datasets, and gain practical knowledge in machine learning and artificial intelligence.</p>
+                    <p>We believe that your dedication and enthusiasm will make this a successful learning experience for you.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggle = document.querySelector(".menu-toggle");
+            const sidebar = document.querySelector(".sidebar");
+
+            menuToggle.addEventListener("click", function () {
+                sidebar.classList.toggle("active");
+            });
+        });
+    </script>
+</body>
+
+</html>
